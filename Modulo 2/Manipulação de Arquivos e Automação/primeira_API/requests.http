@@ -1,0 +1,10 @@
+GET http://localhost:5000/
+Accept: application/txt
+###
+GET http://localhost:5000/sobre
+Accept: application/txt
+
+###
+
+GET http://localhost:5000/api/status
+Accept: application/txt
