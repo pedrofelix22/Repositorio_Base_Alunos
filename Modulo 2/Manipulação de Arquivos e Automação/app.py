@@ -1,28 +1,55 @@
-import streamlit as st
-from datetime import datetime
+from flask import Flask, abort, redirect, render_template, request, url_for
 
-st.title("Locadora de Veiculos")
-st.title("Aluguel e venda de carros")
-st.image("nova logo].png")
+import repository
+from databese import criar_banco
 
-st.sidebar.title("patrocinador carful  força e elegancia")
-carro = st.sidebar.selectbox("Selecione o carro que deseja alugar:", ["Lamborghini huracan","Hennessey Venom F5","porsche","Ferari SF90 Spider","bugatti tourbillon","Aston Martin DBS"])
 
-valores_diarias =  {"Lamborghini huracan":10000, "Hennessey Venom F5":15000, "porsche":20000, "Ferrari SF90 Spider":100000, "bugatti tourbillon":50000, "Aston Martin DBS":60000}
-valor_do_carro = {"Lamborghini huracan":2500000, "Hennessey Venom F5": 3000000 , "porsche":2600000, "Ferrari SF90 Spider":2600000, "bugatti tourbillon":50000000, "Aston Martin DBS":4600000}
-st.image(f"{carro}.png", width=750)
-st.subheader(f"valor da diaria: R$ {valores_diarias[carro]}")
-st.subheader(f"Valor da compra: R$ {valor_do_carro[carro]}")
+app = Flask(__name__)
 
-data_de_retirada = st.date_input("Selecione a data de retirada: ",datetime.now())
-data_devolucao = st.date_input("selecione a data da devolução: ", data_de_retirada)
 
-if st.button("Alugar"):
+@app.get("/")
+def index():
+    jogos = repository.listar_jogos()
+    return render_template("index.html", jogos=jogos)
 
-    dias = (data_devolucao - data_de_retirada).days
-    total = dias * valores_diarias[carro]
-    st.success(f"Alugando o carro por {dias} o custo total e: R$ {total}")
 
-if st.button("Comprar"):
-   
-    st.success(f"Parabem por ter comprado um {carro} na nosa locadora, a sua compra total fica em {carro}")
+@app.post("/cadastrar")
+def cadastrar():
+    repository.criar_jogo(
+        nome=request.form["nome"],
+        genero=request.form["genero"],
+        nota=float(request.form["nota"]),
+        imagem_url=request.form.get("imagem_url", ""),
+    )
+    return redirect(url_for("index"))
+
+
+@app.route("/editar/<int:jogo_id>", methods=["GET", "POST"])
+def editar(jogo_id):
+    jogo = repository.buscar_jogo(jogo_id)
+    if jogo is None:
+        abort(404)
+
+    if request.method == "POST":
+        repository.atualizar_jogo(
+            jogo_id=jogo_id,
+            nome=request.form["nome"],
+            genero=request.form["genero"],
+            nota=float(request.form["nota"]),
+            imagem_url=request.form.get("imagem_url", ""),
+        )
+        return redirect(url_for("index"))
+
+    return render_template("editar.html", jogo=jogo)
+
+
+@app.post("/excluir/<int:jogo_id>")
+def excluir(jogo_id):
+    if not repository.excluir_jogo(jogo_id):
+        abort(404)
+    return redirect(url_for("index"))
+
+
+if __name__ == "__main__":
+    criar_banco()
+    app.run(debug=True)
