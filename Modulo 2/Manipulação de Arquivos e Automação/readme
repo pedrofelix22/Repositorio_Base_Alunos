@@ -1,0 +1,196 @@
+# 🎮 Sistema de Cadastro de Jogos
+
+## 📌 Sobre o projeto
+
+Este projeto foi desenvolvido como parte de uma **avaliação do curso de Python**.
+
+O sistema consiste em uma aplicação web para **cadastrar, visualizar, editar e excluir jogos**, utilizando **Python, Flask e SQLite**.
+
+A aplicação permite armazenar informações como nome do jogo, gênero, nota e uma URL para sua imagem.
+
+---
+
+## 🚀 Tecnologias utilizadas
+
+* 🐍 **Python** — linguagem utilizada no desenvolvimento.
+* 🌐 **Flask** — framework utilizado para criar a aplicação web.
+* 🗄️ **SQLite** — banco de dados utilizado para armazenar os jogos.
+* 📝 **HTML** — utilizado para criar as páginas da aplicação.
+* 🎨 **CSS** — utilizado para estilização da interface.
+
+---
+
+## ⚙️ Funcionalidades
+
+O sistema possui as seguintes funcionalidades:
+
+* ✅ Listar jogos cadastrados
+* ➕ Cadastrar novos jogos
+* ✏️ Editar jogos existentes
+* 🗑️ Excluir jogos
+* ⭐ Registrar uma nota para cada jogo
+* 🎭 Registrar o gênero do jogo
+* 🖼️ Adicionar uma URL de imagem
+* 💾 Armazenar os dados em um banco SQLite
+
+---
+
+## 📂 Estrutura do projeto
+
+Uma possível estrutura para o projeto é:
+
+```text
+projeto-jogos/
+│
+├── app.py
+├── jogos.db
+│
+├── templates/
+│   ├── index.html
+│   └── editar.html
+│
+└── static/
+    └── style.css
+```
+
+### 📄 Descrição dos arquivos
+
+**`app.py`**
+Contém o código principal da aplicação Flask, incluindo as rotas, conexão com o banco de dados e operações de cadastro, edição e exclusão.
+
+**`jogos.db`**
+Banco de dados SQLite onde as informações dos jogos são armazenadas.
+
+**`templates/index.html`**
+Página principal que exibe os jogos cadastrados e o formulário de cadastro.
+
+**`templates/editar.html`**
+Página utilizada para editar as informações de um jogo.
+
+**`static/style.css`**
+Arquivo opcional para definir o estilo visual das páginas.
+
+---
+
+## 🗄️ Banco de dados
+
+O projeto utiliza o **SQLite** para armazenar os dados.
+
+A tabela `jogos` possui os seguintes campos:
+
+| Campo        | Tipo    | Descrição                   |
+| ------------ | ------- | --------------------------- |
+| `id`         | INTEGER | Identificador único do jogo |
+| `nome`       | TEXT    | Nome do jogo                |
+| `genero`     | TEXT    | Gênero do jogo              |
+| `nota`       | REAL    | Nota atribuída ao jogo      |
+| `imagem_url` | TEXT    | Endereço da imagem do jogo  |
+
+---
+
+## 🔄 Funcionamento
+
+Ao iniciar a aplicação, o programa verifica se a tabela `jogos` existe. Caso não exista, ela é criada automaticamente.
+
+Na página inicial, os jogos cadastrados são buscados no banco de dados e exibidos na tela.
+
+O usuário pode:
+
+1. **Cadastrar** um novo jogo;
+2. **Visualizar** os jogos cadastrados;
+3. **Editar** as informações de um jogo;
+4. **Excluir** um jogo.
+
+As operações de banco de dados são realizadas utilizando comandos SQL através do módulo `sqlite3`.
+
+---
+
+## 🛠️ Como executar o projeto
+
+### 1. Instale o Python
+
+Certifique-se de que o Python esteja instalado no computador.
+
+Para verificar:
+
+```bash
+python --version
+```
+
+---
+
+### 2. Instale o Flask
+
+No terminal, execute:
+
+```bash
+pip install flask
+```
+
+---
+
+### 3. Execute o projeto
+
+Entre na pasta do projeto e execute:
+
+```bash
+python app.py
+```
+
+---
+
+### 4. Acesse no navegador
+
+Depois de iniciar o programa, abra:
+
+```text
+http://127.0.0.1:5000
+```
+
+A página inicial do sistema será exibida.
+
+---
+
+## 🧠 Conceitos de Python utilizados
+
+Durante o desenvolvimento foram utilizados conceitos importantes estudados no curso, como:
+
+* Funções
+* Variáveis
+* Estruturas condicionais
+* Importação de bibliotecas
+* Rotas do Flask
+* Requisições HTTP
+* Formulários HTML
+* Banco de dados SQLite
+* Comandos SQL
+* CRUD
+
+### CRUD
+
+O projeto implementa as quatro operações básicas de um sistema de banco de dados:
+
+* **Create (Criar)** → cadastrar jogos
+* **Read (Ler)** → visualizar jogos
+* **Update (Atualizar)** → editar jogos
+* **Delete (Excluir)** → remover jogos
+
+---
+
+## 🎯 Objetivo do projeto
+
+O principal objetivo deste projeto é aplicar, de forma prática, os conhecimentos adquiridos durante o curso de Python, especialmente o desenvolvimento de aplicações web utilizando **Flask** e a integração com **SQLite**.
+
+O projeto também demonstra como uma aplicação Python pode receber informações de usuários, armazená-las em um banco de dados e posteriormente consultar, alterar ou excluir esses dados.
+
+---
+
+## 👨‍💻 Desenvolvedor
+
+Projeto desenvolvido por **Pedro Henrique Felix dos Santos** como parte de uma avaliação do curso de Python.
+
+---
+
+## 📚 Conclusão
+
+Este projeto representa uma aplicação prática dos conhecimentos de programação em Python, mostrando a integração entre **Python, Flask, HTML e SQLite** para criar um sistema web funcional de gerenciamento de jogos.
